@@ -10,17 +10,21 @@
   "author": "Kelompok 4",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "latest",
     "eslint": "latest",
     "eslint-config-airbnb-base": "latest",
     "eslint-config-prettier": "latest",
     "eslint-plugin-import": "latest",
     "eslint-plugin-prettier": "latest",
+    "nodemon": "latest",
     "prettier": "latest"
   },
   "dependencies": {
-    "express": "latest",
+    "bcryptjs": "^2.4.3",
     "cors": "latest",
-    "dotenv": "latest"
+    "dotenv": "^16.4.5",
+    "express": "latest",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.6",
+    "sequelize": "^6.6.5"
   }
 }
