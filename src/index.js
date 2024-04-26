@@ -27,6 +27,8 @@ sequelize
 app.use('/user', userRouter);
 // router end
 
-app.listen(process.env.SERVER_PORT, () => {
-  console.log('Server Running');
+const PORT = process.env.SERVER_PORT;
+
+app.listen(PORT, () => {
+  console.log(`Server Running on Port ${PORT}`);
 });
