@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { nanoid } = require('nanoid');
 const { users } = require('../models');
 
@@ -30,4 +31,18 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { register };
+const login = async (req, res) => {
+  const data = req.userInfo;
+  const token = jwt.sign(
+    { id: data.id, userName: data.userName },
+    process.env.JWT_SECRET,
+    { expiresIn: 60 },
+  );
+
+  return res.status(200).send({
+    message: 'Login Success',
+    access_token: token,
+  });
+};
+
+module.exports = { register, login };

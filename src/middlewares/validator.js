@@ -1,4 +1,5 @@
 const validator = require('validator');
+const bcrypt = require('bcrypt');
 const { users } = require('../models');
 
 const regisValidator = async (req, res, next) => {
@@ -47,4 +48,27 @@ const regisValidator = async (req, res, next) => {
   return next();
 };
 
-module.exports = { regisValidator };
+const loginValidator = async (req, res, next) => {
+  const { userName, password } = req.body;
+
+  const getUser = await users.findOne({ where: { username: userName } });
+
+  if (!getUser) {
+    return res.status(400).send({
+      message: 'Error, user not found',
+    });
+  }
+
+  const dataUser = getUser.dataValues;
+  const comparedPassword = bcrypt.compareSync(password, dataUser.password);
+  if (!comparedPassword) {
+    return res.status(400).send({
+      message: 'Error, incorrect password',
+    });
+  }
+
+  req.userInfo = dataUser;
+  return next();
+};
+
+module.exports = { regisValidator, loginValidator };
