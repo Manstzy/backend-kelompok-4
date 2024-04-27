@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { nanoid } = require('nanoid');
 const { users } = require('../models');
 
+
 const register = async (req, res) => {
   const userId = `user-${nanoid(16)}`;
   const info = {
