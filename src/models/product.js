@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     stock: DataTypes.INTEGER,
     weight: DataTypes.INTEGER,
-    createdAt: DataTypes.INTEGER, // Corrected field name
     category_id: DataTypes.INTEGER,
   }, {
     sequelize,

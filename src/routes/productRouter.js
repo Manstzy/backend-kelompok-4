@@ -1,12 +1,12 @@
 // routes/productRouter.js
 
 const express = require('express');
-const Product = require('../models/product'); // Import Product model
+const { Product } = require('../models'); // Import Product model
 
 const router = express.Router();
 
 // Create a product
-router.post('/', async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
     const product = await Product.create(req.body);
     res.status(201).json(product);
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get all products
-router.get('/', async (req, res) => {
+router.get('/allproduct', async (req, res) => {
   try {
     const products = await Product.findAll();
     res.json(products);
