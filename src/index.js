@@ -1,36 +1,30 @@
-require('dotenv').config();
+// index.js
+
 const express = require('express');
 const cors = require('cors');
-const { sequelize } = require('./models');
-
+const { sequelize } = require('./models'); // Import Sequelize instance
+const productRouter = require('./routes/productRouter'); // Import product router
 const userRouter = require('./routes/userRouter');
 const addressRouter = require('./routes/addressRouter');
 
 const app = express();
 
-// middleware start
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(cors({ origin: true, credentials: true }));
+
+// Database connection
 sequelize
   .authenticate()
-  .then(() => {
-    console.log('database connection has been established successfully');
-  })
-  .catch((error) => {
-    console.log('connection error', error);
-  });
+  .then(() => console.log('Database connection has been established successfully'))
+  .catch((error) => console.error('Connection error', error));
 
-// middleware end
-
-// router start
+// Routes
+app.use('/product', productRouter); // Use product router
 app.use('/user', userRouter);
 app.use('/address', addressRouter);
 // router end
 
-const PORT = process.env.SERVER_PORT;
-
-app.listen(PORT, () => {
-  console.log(`Server Running on Port ${PORT}`);
-});
+const PORT = process.env.SERVER_PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
