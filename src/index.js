@@ -4,6 +4,7 @@ const cors = require('cors');
 const { sequelize } = require('./models');
 
 const userRouter = require('./routes/userRouter');
+const addressRouter = require('./routes/addressRouter');
 
 const app = express();
 
@@ -25,6 +26,7 @@ sequelize
 
 // router start
 app.use('/user', userRouter);
+app.use('/address', addressRouter);
 // router end
 
 const PORT = process.env.SERVER_PORT;
