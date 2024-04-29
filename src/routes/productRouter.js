@@ -35,10 +35,10 @@ router.get('/:id', async (req, res) => {
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
     }
-    res.json(product);
+    return res.json(product);
   } catch (error) {
     console.error('Error fetching product by ID:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -51,10 +51,10 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Product not found' });
     }
     await product.update(req.body);
-    res.json(product);
+    return res.json(product);
   } catch (error) {
     console.error('Error updating product:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -67,10 +67,10 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Product not found' });
     }
     await product.destroy();
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error) {
     console.error('Error deleting product:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

@@ -10,10 +10,10 @@ const {
 
 const router = express.Router();
 
-router.post('/addAddress', verify, postAddress);
-router.get('/getAllAddress', verify, getAddress);
-router.get('/getOneAddress/:id', verify, getAddressById);
-router.put('/putAddress/:id', verify, updateAddress);
-router.delete('/deleteAddress/:id', verify, deleteAddress);
+router.post('/', verify, postAddress);
+router.get('/', verify, getAddress);
+router.get('/:id', verify, getAddressById);
+router.put('/:id', verify, updateAddress);
+router.delete('/:id', verify, deleteAddress);
 
 module.exports = router;
