@@ -1,14 +1,21 @@
 // routes/productRouter.js
 
 const express = require('express');
-const Product = require('../models/product'); // Import Product model
+const {Product} = require('../models'); // Import Product model
 
 const router = express.Router();
 
 // Create a product
 router.post('/', async (req, res) => {
+  const info = {
+    sku: req.body.sku,
+    description: req.body.description,
+    price: req.body.price,
+    stock: req.body.stock,
+    weight: req.body.weight,
+  };
   try {
-    const product = await Product.create(req.body);
+    const product = await Product.create(info);
     res.status(201).json(product);
   } catch (error) {
     console.error('Error creating product:', error);
