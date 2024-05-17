@@ -28,10 +28,6 @@ module.exports = {
       user_id: {
         type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id',
-        },
         onDelete: 'CASCADE',
       },
       createdAt: {

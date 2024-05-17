@@ -2,6 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Create the products table
     await queryInterface.createTable('products', {
       id: {
         allowNull: false,
@@ -18,36 +19,40 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
-      price: {
-        type: Sequelize.INTEGER
-      },
       stock: {
         type: Sequelize.INTEGER
       },
       weight: {
         type: Sequelize.INTEGER
       },
-      create_at: {
-        type: Sequelize.INTEGER
+      createdAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
+      updatedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      // Define the foreign key for category_id
       category_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'categories',
-          key: 'id'
+          model: 'categories',  // Name of the referenced table
+          key: 'id'  // Primary key of the referenced table
         },
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        onUpdate: 'CASCADE', // Cascade on update
+        onDelete: 'SET NULL' // Set null on delete
       }
     });
+
+    // Add an index on category_id for faster queries
+    await queryInterface.addIndex('products', ['category_id']);
   },
+
   async down(queryInterface, Sequelize) {
+    // Drop the products table
     await queryInterface.dropTable('products');
   }
 };
